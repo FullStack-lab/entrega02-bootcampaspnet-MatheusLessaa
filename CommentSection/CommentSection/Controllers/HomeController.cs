@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommentSection.Models.Comment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,25 @@ namespace CommentSection.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult CommentList()
         {
-            return View();
+
+            var comment = CommentData.Post;
+            return View(comment);
+
         }
 
-        public ActionResult About()
+        public ActionResult CommentDetailed(int id)
         {
-            ViewBag.Message = "Your application description page.";
+            var comment = CommentData.Post.FirstOrDefault(t => t.Id == id);
 
-            return View();
-        }
+            if (comment == null) 
+            { 
+                return HttpNotFound();
+            }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            return View(comment);
 
-            return View();
         }
     }
 }
