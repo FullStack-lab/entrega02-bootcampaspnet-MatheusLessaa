@@ -1,0 +1,12 @@
+﻿@model CommentSection.Models.Comment.Posted
+
+<h2>Confirmar Exclusão</h2>
+
+<p>Tem certez que deseja excluir o Post com o título: @Model.Title</p>
+
+<form method="post" action="/Post/DeleteConfirmed">
+    <button type="submit" class="btn btn-danger">Excluir</button>
+</form>
+
+
+

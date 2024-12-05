@@ -1,0 +1,19 @@
+﻿@model CommentSection.Models.Comment.Posted
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta viewport="width=device-width" />
+</head>
+
+<body>
+    <h1>Detalhes do comentário</h1>
+    ID: @Model.Id;
+    Auth: @Model.Author;
+    Title: @Model.Title;
+    Desc: @Model.Description;
+    <a class="btn btn-danger" href="@Url.Action("Delete", "Post", new {id=Model.Id})">Excluir</a>
+
+</body>
+</html>
