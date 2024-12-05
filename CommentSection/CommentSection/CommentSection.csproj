@@ -126,7 +126,7 @@
     </Compile>
     <Compile Include="Models\Comment\Post.cs" />
     <Compile Include="Models\Comment\PostData.cs" />
-    <Compile Include="Models\Comment\Replies.cs" />
+    <Compile Include="Models\Comment\Commentary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,9 +4,11 @@
 
 <p>Tem certez que deseja excluir o Post com o título: @Model.Title</p>
 
-<form method="post" action="/Post/DeleteConfirmed">
-    <button type="submit" class="btn btn-danger">Excluir</button>
-</form>
 
-
+@using (Html.BeginForm("DeleteConfirmed", "Post", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    <button type="submit">Excluir</button>
+    <a href="@Url.Action("Index", "Post")">Cancelar</a>
+}
 

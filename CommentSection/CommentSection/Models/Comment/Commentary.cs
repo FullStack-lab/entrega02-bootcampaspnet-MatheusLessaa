@@ -5,13 +5,11 @@ using System.Web;
 
 namespace CommentSection.Models.Comment
 {
-    public class Replies
+    public class Commentary
     {
         public string repAuthor { get; set; }
         public string repComment { get; set; }
-
+        public int repId { get; set; }
         public DateTime repTime { get; set; } = DateTime.Now;
-        public int repCount { get; set; }
-
     }
 }

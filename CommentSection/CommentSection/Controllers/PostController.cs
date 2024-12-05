@@ -33,6 +33,36 @@ namespace CommentSection.Controllers
             return View(post);//else, retorna a view com os dados do post selecionado
         }
 
+        [HttpPost]
+        public ActionResult AddReply (int id, string author, string text)
+        {
+
+            //Procurar o post pelo ID
+            var post = PostData.posts.FirstOrDefault(t => t.Id == id);
+
+            if (post == null)//Se o post não for encontrado, retorna 404
+            {
+                return HttpNotFound();
+            }
+
+            //Gera uma nova ID para o comentário
+            int newRepId = post.ReplyList.Any()
+                ? post.ReplyList.Max(rep =>rep.repId) +1 : 0;
+
+            //Cria uma nova resposta e adiciona ela a lista de respostas existentes
+            var newReply = new Commentary
+            {
+                repId=newRepId,
+                repAuthor = author,
+                repComment = text,
+                repTime = DateTime.Now,
+            };
+
+            post.ReplyList.Add(newReply); //adiciona a resposta criada dentro da variável replylist
+
+            return RedirectToAction("Details","Post", new {id=id});    
+        }
+
 
         //Função de criação de um novo post
         [HttpGet]
@@ -70,6 +100,7 @@ namespace CommentSection.Controllers
         public ActionResult Delete(int id)
         {
             var post = PostData.posts.FirstOrDefault(t=> t.Id == id);
+
             if (post == null)
             {
                 return HttpNotFound();
@@ -80,15 +111,18 @@ namespace CommentSection.Controllers
         [HttpPost]
         public ActionResult DeleteConfirmed(int id)
         {
-            var post = PostData.posts.Find(t=>t.Id==id);
-
+            var post = PostData.posts.FirstOrDefault(t=>t.Id==id);
 
             if (post != null)
             {
                 PostData.posts.Remove(post);
-
+                return RedirectToAction("Create");
             }
-            return RedirectToAction("PostList");
+
+            return HttpNotFound();
         }
+
+
     }
+
 }

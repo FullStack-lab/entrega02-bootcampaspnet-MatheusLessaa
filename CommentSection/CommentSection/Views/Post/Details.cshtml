@@ -8,12 +8,52 @@
 </head>
 
 <body>
-    <h1>Detalhes do comentário</h1>
-    ID: @Model.Id;
-    Auth: @Model.Author;
-    Title: @Model.Title;
-    Desc: @Model.Description;
-    <a class="btn btn-danger" href="@Url.Action("Delete", "Post", new {id=Model.Id})">Excluir</a>
 
+    <div>
+        <h3>@Model.Title</h3>
+        <p>@Model.Author</p>
+        <hr />
+        <h5>@Model.Description</h5>
+    </div>
+
+    <a class="btn btn-danger" href="@Url.Action("Delete", "Post", new {id=Model.Id})">Excluir</a>
+    <a class="btn btn-secondary" href="@Url.Action("PostList", "Post")">Retornar</a>
+    <hr />
+
+    <h3>Respostas</h3> @*Campo de respostas existentes*@
+   <div class="row">
+       <div class="col-1"></div>
+       <div class="col">
+           <ul>
+               @foreach (var reply in Model.ReplyList)
+               {
+                   <li>
+                       <strong>@reply.repAuthor:</strong> @reply.repComment <br />
+                       <small>@reply.repTime.ToString("dd/MM/yyyy HH:mm")</small>
+                   </li>
+               }
+           </ul>
+       </div>
+   </div>
+
+
+    <hr />
+
+
+    <h3>Adicionar uma Resposta</h3> @*Campo para adicionar uma resposta*@
+    @using (Html.BeginForm("AddReply", "Post", FormMethod.Post))
+    {
+        @Html.HiddenFor(model => model.Id)
+
+        <div>
+            <label for="author">Autor:</label>
+            <input type="text" id="author" name="Author" required />
+        </div>
+        <div>
+            <label for="text">Texto da Resposta:</label>
+            <textarea id="text" name="Text" required></textarea>
+        </div>
+        <button type="submit">Adicionar Resposta</button>
+    }
 </body>
 </html>

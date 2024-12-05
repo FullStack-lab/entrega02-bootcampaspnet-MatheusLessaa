@@ -12,7 +12,6 @@ namespace CommentSection.Models.Comment
         public string Description { get; set; }
         public string Author { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-        public List<Replies> ReplyList = new List<Replies>();
-
+        public List<Commentary> ReplyList = new List<Commentary>();
     }
 }

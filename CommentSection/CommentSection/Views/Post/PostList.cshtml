@@ -9,12 +9,22 @@
 </head>
 
 <body>
-    <h1>Lista de comentários</h1>
+    <h1>Lista de tópicos</h1>
+    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Create", "Post")'">
+        Novo Post
+    </button>
+
 
     @foreach (var comment in Model)
     {
-        @comment.Author;
         @comment.Description;
+        @comment.Author;
+        <a href="@Url.Action("Details", "Post", new { id = comment.Id })">
+            Ver detalhes
+        </a>
+        <p>
+            @comment.ReplyList.Count Comentários
+        </p>
         <hr />
     }
 </body>
