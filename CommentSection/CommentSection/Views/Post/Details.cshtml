@@ -30,6 +30,15 @@
                    <li>
                        <strong>@reply.repAuthor:</strong> @reply.repComment <br />
                        <small>@reply.repTime.ToString("dd/MM/yyyy HH:mm")</small>
+
+                       <!-- Botão para deletar a resposta -->
+                       @using (Html.BeginForm("DeleteReply", "Post", FormMethod.Post))
+                       {
+                           @Html.AntiForgeryToken()
+                           @Html.Hidden("postId", Model.Id) <!-- ID do post -->
+                           @Html.Hidden("repId", reply.repId) <!-- ID da resposta -->
+                           <button type="submit" class="btn btn-danger">Deletar</button>
+                       }
                    </li>
                }
            </ul>

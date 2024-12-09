@@ -9,10 +9,9 @@
 </head>
 
 <body>
-    <h1>Lista de tópicos</h1>
-    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Create", "Post")'">
-        Novo Post
-    </button>
+    <h3>Aqui ficam os comentários do post</h3>
+
+
 
 
     @foreach (var comment in Model)
@@ -23,9 +22,13 @@
             Ver detalhes
         </a>
         <p>
-            @comment.ReplyList.Count Comentários
+            @comment.ReplyList.Count Respostas
         </p>
         <hr />
     }
+
+    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Create", "Post")'">
+        Novo Comentário
+    </button>
 </body>
 </html>

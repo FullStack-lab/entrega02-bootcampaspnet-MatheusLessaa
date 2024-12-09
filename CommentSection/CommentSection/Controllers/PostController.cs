@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CommentSection.Controllers
 {
@@ -122,7 +123,25 @@ namespace CommentSection.Controllers
             return HttpNotFound();
         }
 
+        [HttpPost]
+        public ActionResult DeleteReply(int? postId, int? repId)
+        {
+            
+            //Procurar o post pelo ID
+            var post = PostData.posts.FirstOrDefault(t => t.Id == postId);
 
+            if (post != null)//Se o post for encontrado, executa o código de exclusão
+            {
+                var replyToDelete = post.ReplyList.FirstOrDefault(r => r.repId == repId); //procura a resposta pelo ID dentro da lista de respostas
+
+
+                post.ReplyList.Remove(replyToDelete); //remove a resposta dentro da variável replylist
+
+                return RedirectToAction("Details", "Post", new { id = postId });
+            }
+
+            return HttpNotFound(); //caso o post não seja encontrado, error 404
+        }
     }
 
 }
