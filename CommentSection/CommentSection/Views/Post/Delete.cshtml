@@ -8,7 +8,7 @@
 @using (Html.BeginForm("DeleteConfirmed", "Post", FormMethod.Post))
 {
     @Html.HiddenFor(model => model.Id)
-    <button type="submit">Excluir</button>
-    <a href="@Url.Action("Index", "Post")">Cancelar</a>
+    <button class="btn btn-danger" type="submit">Excluir</button>
+    <a class ="btn btn-secondary" href="@Url.Action("PostList", "Post")">Cancelar</a>
 }
 

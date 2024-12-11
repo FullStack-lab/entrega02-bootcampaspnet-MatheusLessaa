@@ -11,13 +11,12 @@
 
 <body>
     <div>
-        <h3>Estudo e utilização de um AGV no ambiente industrial</h3>
-        <p>Matheus Lessa</p>
-        <hr />
-        <h5>Este é o corpo da postagem, aqui vem os detalhes da postagem</h5>
-        <h5> Postado em @DateTime.Now</h5>
-        <p>@CommentSection.Models.Comment.PostData.posts.Count Comentários </p>
-        <a href="/Post/PostList">Ver detalhes</a>
+        <p class="pt-3"><strong> Estudo e utilização de um AGV no ambiente industrial - Matheus Lessa </strong> há 3 Horas</p> @*Pode ser substituido pela expressão DateTime.Now - Data criada quando em um Model*@
+        <p>Este é o corpo da postagem, aqui vem os detalhes da postagem<p>
+        <a href="/Post/PostList" class="btn btn-primary">
+            Visualizar @CommentSection.Models.Comment.PostData.posts.Count Comentários
+        </a>
     </div>
+    <hr />
 </body>
 </html>

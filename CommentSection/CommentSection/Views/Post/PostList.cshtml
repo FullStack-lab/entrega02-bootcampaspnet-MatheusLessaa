@@ -9,26 +9,124 @@
 </head>
 
 <body>
-    <h3>Aqui ficam os comentários do post</h3>
-
-
-
-
-    @foreach (var comment in Model)
-    {
-        @comment.Description;
-        @comment.Author;
-        <a href="@Url.Action("Details", "Post", new { id = comment.Id })">
-            Ver detalhes
-        </a>
-        <p>
-            @comment.ReplyList.Count Respostas
-        </p>
-        <hr />
-    }
+    <div>
+        <p><strong> Matheus Lessa </strong> há 3 Horas</p> @*Pode ser substituido pela expressão DateTime.Now - Data criada quando em um Model*@
+        <h3>Estudo e utilização de um AGV no ambiente industrial</h3>
+        <h5><strong>Este é o corpo da postagem, aqui vem os detalhes da postagem</strong></h5>
+    </div>
 
     <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Create", "Post")'">
         Novo Comentário
     </button>
+
+    <hr />
+    @foreach (var comment in Model) //Esse foreach é referente a todos os comentários e respostas
+    {
+        var timeSpan = DateTime.Now - comment.Created; //A sequência de ifs é referente ao tempo de postagem
+
+        string timeDifference;
+        if (timeSpan.Days > 0)
+        {
+            timeDifference = $"{timeSpan.Days} dia(s) atrás";
+        }
+        else if (timeSpan.Hours > 0)
+        {
+            timeDifference = $"{timeSpan.Hours} hora(s) atrás";
+        }
+        else if (timeSpan.Minutes > 0)
+        {
+            timeDifference = $"{timeSpan.Minutes} minuto(s) atrás";
+        }
+        else
+        {
+            timeDifference = "Postado agora mesmo";
+        }
+
+        <div class="row">
+            @*Essa sequencia de divs é referente às respostas do comentário no post*@
+            <div class="col-1"></div>
+            <div class="col-9">
+                <p><strong>@comment.Author </strong><span class="text-muted">@timeDifference</span></p>
+                <p class="pl-7">@comment.Description</p>
+                <p class="mb-3"></p>
+
+                <button class="btn btn-outline-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@comment.Id" aria-expanded="false" aria-controls="collapseExample">
+                    @comment.ReplyList.Count Respostas
+                </button> @*Botão responsável pelo collapse*@
+
+
+                <div class="collapse" id="collapse-@comment.Id">
+                    @*Conteúdo do collapse*@
+                    <div class="card card-body mb-3">
+                        @if (comment.ReplyList.Count == 0)
+                        {
+                            <p>Este comentário não possui respostas ainda, seja o primeiro a responder!</p>
+                        }
+
+                        @foreach (var reply in comment.ReplyList)
+                        {
+                            var repTimeSpan = DateTime.Now - reply.repTime; //A sequência de ifs é referente ao tempo de postagem
+
+                            string repTimeDifference;
+                            if (repTimeSpan.Days > 0)
+                            {
+                                repTimeDifference = $"{repTimeSpan.Days} dia(s) atrás";
+                            }
+                            else if (repTimeSpan.Hours > 0)
+                            {
+                                repTimeDifference = $"{repTimeSpan.Hours} hora(s) atrás";
+                            }
+                            else if (repTimeSpan.Minutes > 0)
+                            {
+                                repTimeDifference = $"{repTimeSpan.Minutes} minuto(s) atrás";
+                            }
+                            else
+                            {
+                                repTimeDifference = "Postado agora mesmo";
+                            }
+                            <div class="row">
+                                <div class="col-10">
+                                    <p><strong>@reply.repAuthor </strong> <span class="text-muted">@repTimeDifference</span></p>
+                                    <p>@reply.repComment</p>
+                                </div>
+                                <div class="col">
+                                    @using (Html.BeginForm("DeleteReply", "Post", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("postId", comment.Id)
+                                        @Html.Hidden("repId", reply.repId)
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Excluir</button>
+                                    }
+                                </div>
+                            </div>
+
+
+                            <hr />
+                        } @*Sequencia de ifs referente ao calculo de tempo da postagem*@
+
+                        @using (Html.BeginForm("AddReply", "Post", FormMethod.Post))
+                        {
+                            @Html.Hidden("id", comment.Id)
+                            <div>
+                                <input class="form-control" type="text" id="author" name="Author" required placeholder="Autor" />
+                            </div>
+                            <div class="mt-3">
+                                <textarea class="form-control" id="text" name="Text" required placeholder="Comentário"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-secondary mt-3">Responder</button>
+                        }
+                        <hr />
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-outline-danger" href="@Url.Action("Delete", "Post", new {id=comment.Id})">Excluir</a>
+            </div>
+            <hr />
+        </div>
+    }
+
+
+
+
 </body>
 </html>

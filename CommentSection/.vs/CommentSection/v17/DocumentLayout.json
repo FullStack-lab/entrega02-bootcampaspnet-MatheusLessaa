@@ -3,18 +3,6 @@
   "WorkspaceRootPath": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4041CB05-D2F3-4AEF-9042-6CDB3533C92D}|CommentSection\\CommentSection.csproj|e:\\curso fullstack\\front\\zencheck bootcamp\\entrega02-bootcampaspnet-matheuslessaa\\commentsection\\commentsection\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4041CB05-D2F3-4AEF-9042-6CDB3533C92D}|CommentSection\\CommentSection.csproj|solutionrelative:commentsection\\controllers\\postcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4041CB05-D2F3-4AEF-9042-6CDB3533C92D}|CommentSection\\CommentSection.csproj|e:\\curso fullstack\\front\\zencheck bootcamp\\entrega02-bootcampaspnet-matheuslessaa\\commentsection\\commentsection\\models\\comment\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4041CB05-D2F3-4AEF-9042-6CDB3533C92D}|CommentSection\\CommentSection.csproj|solutionrelative:commentsection\\models\\comment\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4041CB05-D2F3-4AEF-9042-6CDB3533C92D}|CommentSection\\CommentSection.csproj|e:\\curso fullstack\\front\\zencheck bootcamp\\entrega02-bootcampaspnet-matheuslessaa\\commentsection\\commentsection\\views\\post\\postlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4041CB05-D2F3-4AEF-9042-6CDB3533C92D}|CommentSection\\CommentSection.csproj|solutionrelative:commentsection\\views\\post\\postlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4041CB05-D2F3-4AEF-9042-6CDB3533C92D}|CommentSection\\CommentSection.csproj|e:\\curso fullstack\\front\\zencheck bootcamp\\entrega02-bootcampaspnet-matheuslessaa\\commentsection\\commentsection\\views\\post\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4041CB05-D2F3-4AEF-9042-6CDB3533C92D}|CommentSection\\CommentSection.csproj|solutionrelative:commentsection\\views\\post\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
@@ -26,74 +14,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 565,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 515,
-          "SelectedChildIndex": 2,
-          "Children": [
+            },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\CommentSection\\Views\\Post\\Index.cshtml",
               "RelativeDocumentMoniker": "CommentSection\\Views\\Post\\Index.cshtml",
               "ToolTip": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\CommentSection\\Views\\Post\\Index.cshtml",
               "RelativeToolTip": "CommentSection\\Views\\Post\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-09T19:41:31.206Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Post.cs",
-              "DocumentMoniker": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\CommentSection\\Models\\Comment\\Post.cs",
-              "RelativeDocumentMoniker": "CommentSection\\Models\\Comment\\Post.cs",
-              "ToolTip": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\CommentSection\\Models\\Comment\\Post.cs",
-              "RelativeToolTip": "CommentSection\\Models\\Comment\\Post.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAYwA8AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T16:18:14.449Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PostController.cs",
-              "DocumentMoniker": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\CommentSection\\Controllers\\PostController.cs",
-              "RelativeDocumentMoniker": "CommentSection\\Controllers\\PostController.cs",
-              "ToolTip": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\CommentSection\\Controllers\\PostController.cs",
-              "RelativeToolTip": "CommentSection\\Controllers\\PostController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T16:29:57.105Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 515,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PostList.cshtml",
-              "DocumentMoniker": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\CommentSection\\Views\\Post\\PostList.cshtml",
-              "RelativeDocumentMoniker": "CommentSection\\Views\\Post\\PostList.cshtml",
-              "ToolTip": "E:\\Curso Fullstack\\Front\\Zencheck Bootcamp\\entrega02-bootcampaspnet-MatheusLessaa\\CommentSection\\CommentSection\\Views\\Post\\PostList.cshtml",
-              "RelativeToolTip": "CommentSection\\Views\\Post\\PostList.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-09T19:48:09.395Z",
+              "WhenOpened": "2024-12-11T20:44:20.946Z",
               "EditorCaption": ""
             }
           ]

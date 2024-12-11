@@ -61,7 +61,7 @@ namespace CommentSection.Controllers
 
             post.ReplyList.Add(newReply); //adiciona a resposta criada dentro da variável replylist
 
-            return RedirectToAction("Details","Post", new {id=id});    
+            return RedirectToAction("PostList","Post");    
         }
 
 
@@ -117,7 +117,7 @@ namespace CommentSection.Controllers
             if (post != null)
             {
                 PostData.posts.Remove(post);
-                return RedirectToAction("Create");
+                return RedirectToAction("PostList");
             }
 
             return HttpNotFound();
@@ -137,7 +137,7 @@ namespace CommentSection.Controllers
 
                 post.ReplyList.Remove(replyToDelete); //remove a resposta dentro da variável replylist
 
-                return RedirectToAction("Details", "Post", new { id = postId });
+                return RedirectToAction("PostList", "Post", new { id = postId });
             }
 
             return HttpNotFound(); //caso o post não seja encontrado, error 404
