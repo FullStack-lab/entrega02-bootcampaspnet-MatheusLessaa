@@ -1,0 +1,144 @@
+﻿@using CommentSection.Models.Comment
+@model List<Posted>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta viewport ="width=device-width"/>
+</head>
+
+<body>
+    <div>
+        <p><strong> Matheus Lessa </strong> há 3 Horas</p> @*Pode ser substituido pela expressão DateTime.Now - Data criada quando em um Model*@
+        <h3>Estudo e utilização de um AGV no ambiente industrial</h3>
+        <h5><strong>Este é o corpo da postagem, aqui vem os detalhes da postagem</strong></h5>
+    </div>
+
+    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Create", "Post")'">
+        Novo Comentário
+    </button>
+
+    <hr />
+    @foreach (var comment in Model) //Esse foreach é referente a todos os comentários e respostas
+    {
+        var timeSpan = DateTime.Now - comment.Created; //A sequência de ifs é referente ao tempo de postagem
+    
+        string timeDifference;
+        if (timeSpan.Days > 0)
+        {
+            timeDifference = $"{timeSpan.Days} dia(s) atrás";
+        }
+        else if (timeSpan.Hours > 0)
+        {
+            timeDifference = $"{timeSpan.Hours} hora(s) atrás";
+        }
+        else if (timeSpan.Minutes > 0)
+        {
+            timeDifference = $"{timeSpan.Minutes} minuto(s) atrás";
+        }
+        else
+        {
+            timeDifference = "Postado agora mesmo";
+        }
+
+        <div class="row">
+            @*Essa sequencia de divs é referente às respostas do comentário no post*@
+            <div class="col-1"></div>
+            <div class="col-8">
+                <p><strong>@comment.Author </strong><span class="text-muted">@timeDifference</span></p>
+                <p class="pl-7">@comment.Description</p>
+                <p class="mb-3"></p>
+
+                @if (comment.ReplyList.Count == 1) //se o comentário possuir apenas uma resposta, o botão aparece escrito X Resposta (no singular)
+                {
+                    <button class="btn btn-outline-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@comment.Id" aria-expanded="false" aria-controls="collapseExample">
+                        @comment.ReplyList.Count Resposta
+                    </button>@*Botão responsável pelo collapse*@
+
+                }
+
+                else if (comment.ReplyList.Count != 1) //Se o comentário possuir mais de uma resposta, o botão aparece escrito no plural
+                {
+                    <button class="btn btn-outline-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@comment.Id" aria-expanded="false" aria-controls="collapseExample">
+                        @comment.ReplyList.Count Respostas
+                    </button>@*Botão responsável pelo collapse*@
+                }
+
+                <div class="collapse" id="collapse-@comment.Id">
+                    @*Conteúdo do collapse*@
+                    <div class="card card-body mb-3">
+                        @if (comment.ReplyList.Count == 0)
+                        {
+                            <p>Este comentário não possui respostas ainda, seja o primeiro a responder!</p>
+                        }
+
+                        @foreach (var reply in comment.ReplyList)
+                        {
+                            var repTimeSpan = DateTime.Now - reply.repTime; //A sequência de ifs é referente ao tempo de postagem
+
+                            string repTimeDifference;
+                            if (repTimeSpan.Days > 0)
+                            {
+                                repTimeDifference = $"{repTimeSpan.Days} dia(s) atrás";
+                            }
+                            else if (repTimeSpan.Hours > 0)
+                            {
+                                repTimeDifference = $"{repTimeSpan.Hours} hora(s) atrás";
+                            }
+                            else if (repTimeSpan.Minutes > 0)
+                            {
+                                repTimeDifference = $"{repTimeSpan.Minutes} minuto(s) atrás";
+                            }
+                            else
+                            {
+                                repTimeDifference = "Postado agora mesmo";
+                            }
+                            <div class="row">
+                                <div class="col-10">
+                                    <p><strong>@reply.repAuthor </strong> <span class="text-muted">@repTimeDifference</span></p>
+                                    <p>@reply.repComment</p>
+                                </div>
+                                <div class="col">
+                                    @*Botões de excluir e editar o post*@
+                                    @using (Html.BeginForm("DeleteReply", "Post", FormMethod.Post))
+                                    {
+                                        @Html.Hidden("postId", comment.Id)
+                                        @Html.Hidden("repId", reply.repId)
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Excluir</button>
+
+                                        <button onclick="window.location.href ='@Url.Action("EditReply", "Post", new {id = comment.Id, repId = reply.repId})'" type="button" class="btn btn-sm btn-outline-warning">Editar</button>
+
+                                    }
+                                </div>
+                            </div>
+                            <hr />
+                        }
+
+                        @using (Html.BeginForm("AddReply", "Post", FormMethod.Post)) //Chama a adição de uma resposta pelo método Post
+                        {
+                            @Html.Hidden("id", comment.Id)
+                            <div>
+                                <input maxlength="30" class="form-control" type="text" id="author" name="Author" required placeholder="Autor" />
+                            </div>
+                            <div class="mt-3">
+                                <textarea maxlength="500" class="form-control" id="text" name="Text" required placeholder="Comentário"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-secondary mt-3">Responder</button>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                @*Botões de exibir detalhes, editar e excluir a resposta*@
+                <a class="btn btn-outline-secondary btn-sm" href="@Url.Action("Details", "Post", new {id=comment.Id})">Detalhes</a>
+                <button onclick="window.location.href ='@Url.Action("EditComment", "Post", new {id = comment.Id})'" type="button" class="btn btn-sm btn-outline-warning">Editar</button>
+                <a class="btn btn-outline-danger btn-sm" href="@Url.Action("Delete", "Post", new {id=comment.Id})">Excluir</a>
+            </div>
+
+            <hr />
+        </div>
+    }
+</body>
+</html>

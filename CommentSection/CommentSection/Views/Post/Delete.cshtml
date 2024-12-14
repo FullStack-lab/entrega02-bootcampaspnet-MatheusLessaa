@@ -1,0 +1,14 @@
+﻿@model CommentSection.Models.Comment.Posted
+
+<h2>Confirmar Exclusão</h2>
+
+<p><strong>Tem certez que deseja excluir o comentário: </strong></p>
+<p>@Model.Description</p>
+
+@using (Html.BeginForm("DeleteConfirmed", "Post", FormMethod.Post)) //Utiliza um formulário para confirmar a exclusão de um comentário e redireciona para o método POST de exclusão
+{
+    @Html.HiddenFor(model => model.Id)
+    <button class="btn btn-danger" type="submit">Excluir</button>
+    <a class ="btn btn-secondary" href="@Url.Action("PostList", "Post")">Cancelar</a>
+}
+
