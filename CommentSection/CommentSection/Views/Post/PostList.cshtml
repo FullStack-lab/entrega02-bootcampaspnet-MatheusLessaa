@@ -89,44 +89,43 @@
                                     <p><strong>@reply.repAuthor </strong> <span class="text-muted">@repTimeDifference</span></p>
                                     <p>@reply.repComment</p>
                                 </div>
-                                <div class="col">
+                                <div class="col"> @*Botões de excluir e editar o post*@
                                     @using (Html.BeginForm("DeleteReply", "Post", FormMethod.Post))
                                     {
                                         @Html.Hidden("postId", comment.Id)
                                         @Html.Hidden("repId", reply.repId)
                                         <button type="submit" class="btn btn-outline-danger btn-sm">Excluir</button>
+
+                                        <button onclick="window.location.href ='@Url.Action("EditReply", "Post", new {id = comment.Id, repId = reply.repId})'" type="button" class="btn btn-sm btn-outline-warning">Editar</button>
+
                                     }
                                 </div>
                             </div>
-
-
                             <hr />
-                        } @*Sequencia de ifs referente ao calculo de tempo da postagem*@
+                        }
 
-                        @using (Html.BeginForm("AddReply", "Post", FormMethod.Post))
+                        @using (Html.BeginForm("AddReply", "Post", FormMethod.Post)) //Chama a adição de uma resposta pelo método Post
                         {
                             @Html.Hidden("id", comment.Id)
                             <div>
-                                <input class="form-control" type="text" id="author" name="Author" required placeholder="Autor" />
+                                <input maxlength="30" class="form-control" type="text" id="author" name="Author" required placeholder="Autor" />
                             </div>
                             <div class="mt-3">
-                                <textarea class="form-control" id="text" name="Text" required placeholder="Comentário"></textarea>
+                                <textarea maxlength="500" class="form-control" id="text" name="Text" required placeholder="Comentário"></textarea>
                             </div>
                             <button type="submit" class="btn btn-secondary mt-3">Responder</button>
                         }
-                        <hr />
+
                     </div>
                 </div>
             </div>
-            <div class="col-2">
-                <a class="btn btn-outline-danger" href="@Url.Action("Delete", "Post", new {id=comment.Id})">Excluir</a>
+            <div class="col-2"> @*Botões de editar e excluir a resposta*@
+                <button onclick="window.location.href ='@Url.Action("EditComment", "Post", new {id = comment.Id})'" type="button" class="btn btn-sm btn-outline-warning">Editar</button>
+                <a class="btn btn-outline-danger btn-sm" href="@Url.Action("Delete", "Post", new {id=comment.Id})">Excluir</a>
             </div>
+
             <hr />
         </div>
     }
-
-
-
-
 </body>
 </html>

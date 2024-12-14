@@ -12,20 +12,11 @@ namespace CommentSection.Models.Comment
             new Posted
             {
                 Id = 1,
-                Author = "Juju",
-                Title = "Meuamô",
-                Description= "Ela está de switch novo oba",
-                Created = DateTime.Now                                
+                Author = "Matheus Lessa",
+                Title = "Teste",
+                Description= "Esse é o campo onde fica o corpo do comentário",
+                Created = DateTime.Now       
             },
-
-            new Posted
-            {
-                Id = 2,
-                Author = "Tetheu",
-                Title = "Amodela",
-                Description= "Ganhou um switch de volta rs",
-                Created = DateTime.Now
-            }
         };
     }
 }
