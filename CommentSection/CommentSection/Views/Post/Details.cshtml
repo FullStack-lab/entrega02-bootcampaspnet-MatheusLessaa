@@ -9,60 +9,87 @@
 
 <body>
 
-    <div>
-        <h3>@Model.Title</h3>
-        <p>@Model.Author</p>
-        <hr />
-        <h5>@Model.Description</h5>
+    <div class="row">
+        <div class="col">
+            <ul>
+                <li>
+                    <p><strong>@Model.Author</strong> @Model.Created</p>
+                </li>
+                <li>
+                    <p class="pl-7">@Model.Description</p>
+                </li>
+                <li>
+                    <p>ID: @Model.Id</p>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <a class="btn btn-danger" href="@Url.Action("Delete", "Post", new {id=Model.Id})">Excluir</a>
-    <a class="btn btn-secondary" href="@Url.Action("PostList", "Post")">Retornar</a>
+    <a class="btn btn-outline-danger" href="@Url.Action("Delete", "Post", new {id=Model.Id})">Excluir</a>
+    <a class="btn btn-outline-warning" href="@Url.Action("EditComment", "Post", new {id=Model.Id})">Editar</a>
+    <a class="btn btn-outline-secondary" href="@Url.Action("PostList", "Post")">Retornar</a>
     <hr />
 
     <h3>Respostas</h3> @*Campo de respostas existentes*@
-   <div class="row">
-       <div class="col-1"></div>
-       <div class="col">
-           <ul>
-               @foreach (var reply in Model.ReplyList)
-               {
-                   <li>
-                       <strong>@reply.repAuthor:</strong> @reply.repComment <br />
-                       <small>@reply.repTime.ToString("dd/MM/yyyy HH:mm")</small>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            @foreach (var reply in Model.ReplyList)
+            {
+                var repTimeSpan = DateTime.Now - reply.repTime; //A sequência de ifs é referente ao tempo de postagem
 
-                       <!-- Botão para deletar a resposta -->
-                       @using (Html.BeginForm("DeleteReply", "Post", FormMethod.Post))
-                       {
-                           @Html.AntiForgeryToken()
-                           @Html.Hidden("postId", Model.Id) <!-- ID do post -->
-                           @Html.Hidden("repId", reply.repId) <!-- ID da resposta -->
-                           <button type="submit" class="btn btn-danger">Deletar</button>
-                       }
-                   </li>
-               }
-           </ul>
-       </div>
-   </div>
+                string repTimeDifference;
+                if (repTimeSpan.Days > 0)
+                {
+                    repTimeDifference = $"{repTimeSpan.Days} dia(s) atrás";
+                }
+                else if (repTimeSpan.Hours > 0)
+                {
+                    repTimeDifference = $"{repTimeSpan.Hours} hora(s) atrás";
+                }
+                else if (repTimeSpan.Minutes > 0)
+                {
+                    repTimeDifference = $"{repTimeSpan.Minutes} minuto(s) atrás";
+                }
+                else
+                {
+                    repTimeDifference = "Postado agora mesmo";
+                }
+                <div class="row">
+                    <div class="col-10">
+                        <p><strong>@reply.repAuthor </strong> <span class="text-muted">@repTimeDifference</span></p>
+                        <p>@reply.repComment</p>
+                    </div>
+                    <div class="col">
+                        @*Botões de excluir e editar o post*@
+                        @using (Html.BeginForm("DeleteReply", "Post", FormMethod.Post))
+                        {
+                            @Html.Hidden("postId", Model.Id)
+                            @Html.Hidden("repId", reply.repId)
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Excluir</button>
+                            <button onclick="window.location.href ='@Url.Action("EditReply", "Post", new {id = Model.Id, repId = reply.repId})'" type="button" class="btn btn-sm btn-outline-warning">Editar</button>
+                        }
+                    </div>
+                </div>
+                <hr/>
 
+            }
+        </div>
+    </div>
 
-    <hr />
 
 
     <h3>Adicionar uma Resposta</h3> @*Campo para adicionar uma resposta*@
-    @using (Html.BeginForm("AddReply", "Post", FormMethod.Post))
+    @using (Html.BeginForm("AddReply", "Post", FormMethod.Post)) //Chama a adição de uma resposta pelo método Post
     {
-        @Html.HiddenFor(model => model.Id)
-
+        @Html.Hidden("id", Model.Id)
         <div>
-            <label for="author">Autor:</label>
-            <input type="text" id="author" name="Author" required />
+            <input maxlength="30" class="form-control" type="text" id="author" name="Author" required placeholder="Autor" />
         </div>
-        <div>
-            <label for="text">Texto da Resposta:</label>
-            <textarea id="text" name="Text" required></textarea>
+        <div class="mt-3">
+            <textarea maxlength="500" class="form-control" id="text" name="Text" required placeholder="Comentário"></textarea>
         </div>
-        <button type="submit">Adicionar Resposta</button>
+        <button type="submit" class="btn btn-secondary mt-3">Responder</button>
     }
 </body>
 </html>

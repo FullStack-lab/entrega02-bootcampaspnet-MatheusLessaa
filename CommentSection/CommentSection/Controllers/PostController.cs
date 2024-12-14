@@ -163,9 +163,8 @@ namespace CommentSection.Controllers
             var existingComment = PostData.posts.FirstOrDefault(t => t.Id == id); //Procura o comentário a ser editado
             
             if (existingComment != null) //Se não for null
-            {
-                existingComment.Title = post.Title; //Altera as variáveis do comentário encontrado com as variáveis recebidas do formulário
-                existingComment.Author = post.Author;
+            {   
+                existingComment.Author = post.Author; //Altera as variáveis do comentário encontrado com as variáveis recebidas do formulário
                 existingComment.Description = post.Description;
                 existingComment.Created = post.Created;
                 return RedirectToAction("PostList", "Post");//Retorna para a lista de posts
